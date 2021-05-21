@@ -3,6 +3,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mycodebook.mvvm.ui.auth.ActivityViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/root_layout"
             android:layout_width="match_parent"
@@ -20,7 +27,7 @@
                     android:id="@+id/image_view_logo"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_centerHorizontal="true"
+                android:layout_centerHorizontal="true"
                     android:layout_marginTop="75dp"
                     android:background="@drawable/ic_app_logo" />
 
@@ -67,6 +74,7 @@
                         android:id="@+id/edit_text_email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:text="@={viewModel.email}"
                         android:layout_marginBottom="12dp"
                         android:background="@drawable/edit_text_round_gray_background"
                         android:drawableLeft="@drawable/ic_email"
@@ -79,6 +87,7 @@
                         android:id="@+id/edit_text_password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:text="@={viewModel.password}"
                         android:layout_marginBottom="12dp"
                         android:background="@drawable/edit_text_round_gray_background"
                         android:drawableLeft="@drawable/ic_lock"
@@ -97,6 +106,7 @@
                         android:textColor="@color/design_default_color_primary_dark" />
 
                 <Button
+                       android:onClick="@{viewModel.onLoginButtonClick}"
                         android:id="@+id/button_sign_in"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
