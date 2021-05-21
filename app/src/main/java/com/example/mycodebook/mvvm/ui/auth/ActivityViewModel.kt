@@ -3,6 +3,7 @@ package com.example.mycodebook.mvvm.ui.auth
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.mycodebook.mvvm.data.repository.MyRepository
+import net.simplifiedcoding.mvvmsampleapp.util.Coroutines
 
 class ActivityViewModel : ViewModel() {
 
@@ -20,8 +21,18 @@ class ActivityViewModel : ViewModel() {
         //Again this is bad practice we should not create instance of a class is inside of another class
         //beacause this result in tight coupling which is bad practice we can use dependency injection
         //for loosly coupled which is good practice
-        val loginResponse =  MyRepository().userLogin(email!!,password!!)
-        authListener?.onSuccess(loginResponse)
+//        val loginResponse =  MyRepository().userLogin(email!!,password!!)
+//        authListener?.onSuccess(loginResponse)
+
+        Coroutines.main {
+            val response = MyRepository().userLogin(email!!,password!!)
+            if(response.isSuccessful){
+                authListener?.onSuccess(response.body()?.user!!)
+            }
+            else{
+                authListener?.onFailure(response.errorBody().toString())
+            }
+        }
     }
 
 }
