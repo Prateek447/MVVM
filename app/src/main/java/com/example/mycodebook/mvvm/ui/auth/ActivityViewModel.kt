@@ -1,8 +1,10 @@
 package com.example.mycodebook.mvvm.ui.auth
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.mycodebook.mvvm.data.repository.MyRepository
+import com.example.mycodebook.mvvm.util.ApiExceptions
 import net.simplifiedcoding.mvvmsampleapp.util.Coroutines
 
 class ActivityViewModel : ViewModel() {
@@ -25,12 +27,16 @@ class ActivityViewModel : ViewModel() {
 //        authListener?.onSuccess(loginResponse)
 
         Coroutines.main {
-            val response = MyRepository().userLogin(email!!,password!!)
-            if(response.isSuccessful){
-                authListener?.onSuccess(response.body()?.user!!)
+            try {
+                val response = MyRepository().userLogin(email!!,password!!)
+                response.user?.let {
+                    authListener?.onSuccess(it)
+                    return@main
+                }
+                authListener?.onFailure(response.message!!)
             }
-            else{
-                authListener?.onFailure(response.errorBody().toString())
+            catch (e : ApiExceptions){
+                authListener?.onFailure(e.toString())
             }
         }
     }
