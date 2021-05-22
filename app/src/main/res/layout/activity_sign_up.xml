@@ -5,9 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mycodebook.mvvm.ui.auth.ActivityViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:background="#E2E2E2"
+        android:id="@+id/signup_layout"
         android:layout_height="match_parent"
         tools:context=".ui.auth.SignupActivity">
 
@@ -63,8 +70,9 @@
 
                 <EditText
                     android:id="@+id/edit_text_name"
-                    android:hint="Belal Khan"
+                    android:hint="Name"
                     android:inputType="text"
+                    android:text="@={viewModel.name}"
                     android:drawablePadding="16dp"
                     android:drawableLeft="@drawable/ic_name"
                     android:background="@drawable/edit_text_round_gray_background"
@@ -75,8 +83,9 @@
 
                 <EditText
                     android:id="@+id/edit_text_email"
-                    android:hint="belal@gmail.com"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
+                    android:text="@={viewModel.email}"
                     android:drawablePadding="16dp"
                     android:drawableLeft="@drawable/ic_email"
                     android:background="@drawable/edit_text_round_gray_background"
@@ -89,6 +98,7 @@
                     android:id="@+id/edit_text_password"
                     android:inputType="textPassword"
                     android:hint="password"
+                    android:text="@={viewModel.password}"
                     android:drawablePadding="16dp"
                     android:drawableLeft="@drawable/ic_lock"
                     android:background="@drawable/edit_text_round_gray_background"
@@ -102,6 +112,7 @@
                     android:inputType="textPassword"
                     android:hint="confirm password"
                     android:drawablePadding="16dp"
+                    android:text="@={viewModel.passwordConfirm}"
                     android:drawableLeft="@drawable/ic_lock"
                     android:background="@drawable/edit_text_round_gray_background"
                     android:layout_width="match_parent"
@@ -121,6 +132,7 @@
                 <Button
                     android:id="@+id/button_sign_up"
                     android:layout_gravity="center_horizontal"
+                    android:onClick="@{viewModel::onSignUpButtonClick}"
                     android:textAllCaps="false"
                     android:text="Sign Up"
                     android:layout_width="150dp"
@@ -131,6 +143,7 @@
             <TextView
                 android:id="@+id/text_view_login"
                 android:layout_marginTop="12dp"
+                android:onClick="@{viewModel::logIn}"
                 android:textColor="@color/design_default_color_primary"
                 android:layout_centerHorizontal="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"

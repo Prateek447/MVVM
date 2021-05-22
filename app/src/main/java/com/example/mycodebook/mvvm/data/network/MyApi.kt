@@ -1,6 +1,7 @@
 package com.example.mycodebook.mvvm.data.network
 
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
@@ -14,6 +15,14 @@ interface MyApi {
    suspend fun userLogin(
         @Field("email") email : String,
         @Field("password")password: String): retrofit2.Response<AuthResponse>
+
+   @FormUrlEncoded
+   @POST("signUp")
+   suspend fun userSingUp(
+       @Field("name") name: String,
+       @Field("email") email: String,
+       @Field("password") password: String
+   ) : Response<AuthResponse>
 
 
     companion object{

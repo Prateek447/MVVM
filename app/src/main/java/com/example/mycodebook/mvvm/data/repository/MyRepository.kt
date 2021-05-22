@@ -11,6 +11,10 @@ class MyRepository(private val api: MyApi, private val db: AppDataBase) : SafeAp
         return apiRequest { api.userLogin(email, password) }
     }
 
+    suspend fun userSignUp(name: String, email: String,password: String) : AuthResponse{
+        return apiRequest { api.userSingUp(name,email,password) }
+    }
+
     suspend fun saveUser(user: User) =  db.getUserDao().upsert(user)
 
     fun getUser() =  db.getUserDao().getUser()

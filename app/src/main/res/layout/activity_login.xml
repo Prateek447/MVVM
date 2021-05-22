@@ -79,7 +79,7 @@
                         android:background="@drawable/edit_text_round_gray_background"
                         android:drawableLeft="@drawable/ic_email"
                         android:drawablePadding="16dp"
-                        android:hint="belal@gmail.com"
+                        android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:padding="12dp" />
 
@@ -106,7 +106,7 @@
                         android:textColor="@color/design_default_color_primary_dark" />
 
                 <Button
-                       android:onClick="@{viewModel.onLoginButtonClick}"
+                       android:onClick="@{viewModel::onLoginButtonClick}"
                         android:id="@+id/button_sign_in"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
@@ -118,6 +118,7 @@
 
             <TextView
                     android:id="@+id/text_view_sign_up"
+                    android:onClick="@{viewModel::register}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linearLayout2"
