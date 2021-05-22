@@ -3,6 +3,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.mycodebook.mvvm.data.repository.MyRepository
 import com.example.mycodebook.mvvm.util.ApiExceptions
+import com.example.mycodebook.mvvm.util.NoInternetException
 import net.simplifiedcoding.mvvmsampleapp.util.Coroutines
 
 class ActivityViewModel(private val repository: MyRepository) : ViewModel() {
@@ -39,6 +40,9 @@ class ActivityViewModel(private val repository: MyRepository) : ViewModel() {
             }
             catch (e : ApiExceptions){
                 authListener?.onFailure(e.toString())
+            }
+            catch (e : NoInternetException){
+                authListener?.onFailure(e.message.toString())
             }
         }
     }

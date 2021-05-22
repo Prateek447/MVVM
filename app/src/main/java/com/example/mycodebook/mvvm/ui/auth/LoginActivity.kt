@@ -1,20 +1,23 @@
 package com.example.mycodebook.mvvm.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.room.Database
 import com.example.mycodebook.mvvm.HomeActivity
 import com.example.mycodebook.mvvm.R
 import com.example.mycodebook.mvvm.data.db.AppDataBase
 import com.example.mycodebook.mvvm.data.db.entites.User
 import com.example.mycodebook.mvvm.data.network.MyApi
+import com.example.mycodebook.mvvm.data.network.NetworkConnnectionInterceptor
 import com.example.mycodebook.mvvm.data.repository.MyRepository
 import com.example.mycodebook.mvvm.databinding.ActivityLoginBinding
-import com.example.mycodebook.mvvm.util.*
+import com.example.mycodebook.mvvm.util.AuthViewModelFactory
+import com.example.mycodebook.mvvm.util.hide
+import com.example.mycodebook.mvvm.util.show
+import com.example.mycodebook.mvvm.util.snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), AuthListener {
@@ -22,8 +25,8 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         super.onCreate(savedInstanceState)
        //setContentView(R.layout.activity_login)
 
-
-        val api =  MyApi()
+        val networkConnnectionInterceptor =  NetworkConnnectionInterceptor(this)
+        val api =  MyApi(networkConnnectionInterceptor)
         val db  = AppDataBase(this)
         val repository = MyRepository(api,db)
         val factory =  AuthViewModelFactory(repository)

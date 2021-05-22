@@ -1,6 +1,5 @@
 package com.example.mycodebook.mvvm.data.network
 
-import android.util.Log
 import com.example.mycodebook.mvvm.util.ApiExceptions
 import org.json.JSONException
 import org.json.JSONObject
