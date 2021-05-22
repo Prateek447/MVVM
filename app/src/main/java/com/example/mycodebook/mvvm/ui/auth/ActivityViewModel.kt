@@ -1,18 +1,19 @@
 package com.example.mycodebook.mvvm.ui.auth
-
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.mycodebook.mvvm.data.repository.MyRepository
 import com.example.mycodebook.mvvm.util.ApiExceptions
 import net.simplifiedcoding.mvvmsampleapp.util.Coroutines
 
-class ActivityViewModel : ViewModel() {
+class ActivityViewModel(private val repository: MyRepository) : ViewModel() {
 
     var email : String? = null
     var password : String? = null
 
     var authListener: AuthListener? =null
+
+    // fun to get the user from the database
+    fun getLoggedInUser() =  repository.getUser()
 
     fun onLoginButtonClick(view : View){
         authListener?.onStarted()
@@ -28,9 +29,10 @@ class ActivityViewModel : ViewModel() {
 
         Coroutines.main {
             try {
-                val response = MyRepository().userLogin(email!!,password!!)
+                val response = repository.userLogin(email!!,password!!)
                 response.user?.let {
                     authListener?.onSuccess(it)
+                    repository.saveUser(it)
                     return@main
                 }
                 authListener?.onFailure(response.message!!)
