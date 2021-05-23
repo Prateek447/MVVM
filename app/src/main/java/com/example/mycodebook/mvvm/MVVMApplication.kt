@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.mycodebook.mvvm.data.db.AppDataBase
 import com.example.mycodebook.mvvm.data.network.MyApi
 import com.example.mycodebook.mvvm.data.network.NetworkConnnectionInterceptor
+import com.example.mycodebook.mvvm.data.preferences.PreferenceProvider
 import com.example.mycodebook.mvvm.data.repository.QuoteRepository
 import com.example.mycodebook.mvvm.data.repository.UserRepository
 import com.example.mycodebook.mvvm.util.AuthViewModelFactory
@@ -32,8 +33,9 @@ class MVVMApplication : Application(), KodeinAware {
         //give the instance of object which is required
         bind() from singleton { MyApi(instance()) }
         bind() from singleton { AppDataBase(instance()) }
+        bind() from singleton { PreferenceProvider(instance()) }
         bind()  from singleton { UserRepository(instance(),instance()) }
-        bind()  from singleton { QuoteRepository(instance(),instance()) }
+        bind()  from singleton { QuoteRepository(instance(),instance(),instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
         bind() from provider { QuoteViewModelFactory(instance()) }
