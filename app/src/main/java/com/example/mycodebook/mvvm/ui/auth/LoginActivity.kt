@@ -5,35 +5,35 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.mycodebook.mvvm.R
-import com.example.mycodebook.mvvm.data.db.entites.User
 import com.example.mycodebook.mvvm.databinding.ActivityLoginBinding
 import com.example.mycodebook.mvvm.util.AuthViewModelFactory
-import com.example.mycodebook.mvvm.util.hide
 import com.example.mycodebook.mvvm.util.home.HomeActivity
-import com.example.mycodebook.mvvm.util.show
 import com.example.mycodebook.mvvm.util.snackbar
-import kotlinx.android.synthetic.main.activity_login.*
+import com.example.mycodebook.mvvm.util.toast
+import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
+class LoginActivity : AppCompatActivity(), KodeinAware {
 
-
+     private lateinit var  binding : ActivityLoginBinding
+     private lateinit var  viewModel :  UserViewModel
     override val kodein by kodein()
     private val factory : AuthViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding : ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)
-        val viewModel =  ViewModelProviders.of(this,factory).get(UserViewModel::class.java)
-        binding.viewModel = viewModel
-        viewModel.authListener = this
+        binding  = DataBindingUtil.setContentView(this,R.layout.activity_login)
+        viewModel =   ViewModelProvider(this,factory).get(UserViewModel::class.java)
 
-        // to check the user is already loggedIn or not if already loggedIn open the HomeAcitviy not logIn Activity
+
+        // to check the user is already loggedIn or not if already loggedIn
+        // open the HomeAcitviy not logIn Activity
         viewModel.getLoggedInUser().observe(this, Observer {
             user ->
 
@@ -45,21 +45,29 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
             }
 
         })
+        binding.buttonSignIn.setOnClickListener {
+            logInUser()
+        }
     }
 
-    override fun onStarted() {
-           progress_bar.show()
-    }
+    private fun logInUser() {
+        val email =  binding.editTextEmail.text.toString().trim()
+        val password =  binding.editTextPassword.text.toString().trim()
 
-    override fun onSuccess(user: User?) {
-            progress_bar.hide()
-            root_layout.snackbar("${user?.name} is log in")
-
-    }
-
-    override fun onFailure(message: String){
-        progress_bar.hide()
-        root_layout.snackbar(message)
+        lifecycleScope.launch {
+            try {
+                val authResponse  =  viewModel.userLogin(email, password)
+                if (authResponse.user != null){
+                    viewModel.saveLoggedInUser(authResponse.user)
+                }
+                else{
+                    binding.rootLayout.snackbar(authResponse.message!!)
+                }
+            }
+            catch (e: Exception){
+                toast(e.message.toString())
+            }
+        }
     }
 
 
