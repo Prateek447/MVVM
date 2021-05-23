@@ -1,4 +1,4 @@
-package com.example.mycodebook.mvvm.util.home.quotes
+package com.example.mycodebook.mvvm.ui.home.quotes
 
 import androidx.lifecycle.ViewModel
 import com.example.mycodebook.mvvm.data.repository.QuoteRepository

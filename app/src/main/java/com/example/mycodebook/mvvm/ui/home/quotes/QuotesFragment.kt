@@ -1,4 +1,4 @@
-package com.example.mycodebook.mvvm.util.home.quotes
+package com.example.mycodebook.mvvm.ui.home.quotes
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

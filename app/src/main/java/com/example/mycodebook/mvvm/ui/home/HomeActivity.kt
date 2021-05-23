@@ -1,4 +1,4 @@
-package com.example.mycodebook.mvvm.util.home
+package com.example.mycodebook.mvvm.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

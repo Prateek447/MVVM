@@ -1,9 +1,8 @@
-package com.example.mycodebook.mvvm.util
+package com.example.mycodebook.mvvm.ui.home.quotes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mycodebook.mvvm.data.repository.UserRepository
-import com.example.mycodebook.mvvm.ui.auth.UserViewModel
+import com.example.mycodebook.mvvm.data.repository.QuoteRepository
 
 
 /*
@@ -13,9 +12,9 @@ import com.example.mycodebook.mvvm.ui.auth.UserViewModel
 * we want to pass to the viewModel class.
 * */
 @Suppress("UNCHECKED_CAST")
-class AuthViewModelFactory(private val repository: UserRepository) :
+class QuoteViewModelFactory(private val repository: QuoteRepository) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return UserViewModel(repository) as T
+        return QuotesViewModel(repository) as T
     }
 }

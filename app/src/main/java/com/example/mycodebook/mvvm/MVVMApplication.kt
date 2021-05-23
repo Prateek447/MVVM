@@ -7,9 +7,9 @@ import com.example.mycodebook.mvvm.data.network.NetworkConnectionInterceptor
 import com.example.mycodebook.mvvm.data.preferences.PreferenceProvider
 import com.example.mycodebook.mvvm.data.repository.QuoteRepository
 import com.example.mycodebook.mvvm.data.repository.UserRepository
-import com.example.mycodebook.mvvm.util.AuthViewModelFactory
-import com.example.mycodebook.mvvm.util.home.profile.ProfileViewModelFactory
-import com.example.mycodebook.mvvm.util.home.quotes.QuoteViewModelFactory
+import com.example.mycodebook.mvvm.ui.auth.AuthViewModelFactory
+import com.example.mycodebook.mvvm.ui.home.profile.ProfileViewModelFactory
+import com.example.mycodebook.mvvm.ui.home.quotes.QuoteViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule

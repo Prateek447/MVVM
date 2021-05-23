@@ -9,8 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.mycodebook.mvvm.R
 import com.example.mycodebook.mvvm.databinding.ActivityLoginBinding
-import com.example.mycodebook.mvvm.util.AuthViewModelFactory
-import com.example.mycodebook.mvvm.util.home.HomeActivity
+import com.example.mycodebook.mvvm.ui.home.HomeActivity
 import com.example.mycodebook.mvvm.util.snackbar
 import com.example.mycodebook.mvvm.util.toast
 import kotlinx.coroutines.launch
@@ -21,7 +20,7 @@ import org.kodein.di.generic.instance
 class LoginActivity : AppCompatActivity(), KodeinAware {
 
      private lateinit var  binding : ActivityLoginBinding
-     private lateinit var  viewModel :  UserViewModel
+     private lateinit var  viewModel :  AuthViewModel
     override val kodein by kodein()
     private val factory : AuthViewModelFactory by instance()
 
@@ -29,7 +28,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
 
         binding  = DataBindingUtil.setContentView(this,R.layout.activity_login)
-        viewModel =   ViewModelProvider(this,factory).get(UserViewModel::class.java)
+        viewModel =   ViewModelProvider(this,factory).get(AuthViewModel::class.java)
 
 
         // to check the user is already loggedIn or not if already loggedIn
@@ -47,6 +46,10 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
         })
         binding.buttonSignIn.setOnClickListener {
             logInUser()
+        }
+
+        binding.textViewSignUp.setOnClickListener {
+            startActivity(Intent(this,SignUpActivity::class.java))
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.mycodebook.mvvm.util.home.profile
+package com.example.mycodebook.mvvm.ui.home.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ class ProfileFragment : Fragment(),KodeinAware{
 
     //dependency injection
     override val kodein by kodein()
-    private val factory :  ProfileViewModelFactory by instance()
+    private val factory : ProfileViewModelFactory by instance()
 
     private lateinit var viewModel: ProfileViewModel
 

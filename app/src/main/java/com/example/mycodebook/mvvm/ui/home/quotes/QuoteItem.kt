@@ -1,4 +1,4 @@
-package com.example.mycodebook.mvvm.util.home.quotes
+package com.example.mycodebook.mvvm.ui.home.quotes
 
 import com.example.mycodebook.mvvm.R
 import com.example.mycodebook.mvvm.data.db.entites.Quotes

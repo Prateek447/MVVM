@@ -1,4 +1,4 @@
-package com.example.mycodebook.mvvm.util.home.profile
+package com.example.mycodebook.mvvm.ui.home.profile
 
 import androidx.lifecycle.ViewModel
 import com.example.mycodebook.mvvm.data.repository.UserRepository
