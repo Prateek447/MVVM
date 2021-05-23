@@ -13,9 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MVVM">
-        <activity android:name=".HomeActivity"/>
         <activity android:name=".ui.auth.SignUpActivity" />
-        <activity android:name=".ui.auth.LoginActivity">
+        <activity android:name=".ui.auth.LoginActivity"/>
+            <activity android:name=".util.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

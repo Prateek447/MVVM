@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.mycodebook.mvvm.HomeActivity
 import com.example.mycodebook.mvvm.R
 import com.example.mycodebook.mvvm.data.db.entites.User
 import com.example.mycodebook.mvvm.databinding.ActivityLoginBinding
 import com.example.mycodebook.mvvm.util.AuthViewModelFactory
 import com.example.mycodebook.mvvm.util.hide
+import com.example.mycodebook.mvvm.util.home.HomeActivity
 import com.example.mycodebook.mvvm.util.show
 import com.example.mycodebook.mvvm.util.snackbar
 import kotlinx.android.synthetic.main.activity_login.*
