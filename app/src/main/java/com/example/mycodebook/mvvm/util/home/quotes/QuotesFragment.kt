@@ -1,6 +1,4 @@
 package com.example.mycodebook.mvvm.util.home.quotes
-
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +6,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mycodebook.mvvm.R
-import com.example.mycodebook.mvvm.util.ApiExceptions
-import com.example.mycodebook.mvvm.util.Coroutines
-import com.example.mycodebook.mvvm.util.toast
+import com.example.mycodebook.mvvm.data.db.entites.Quotes
+import com.example.mycodebook.mvvm.util.*
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.quotes_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -30,21 +31,46 @@ class QuotesFragment : Fragment() , KodeinAware{
         return inflater.inflate(R.layout.quotes_fragment, container, false)
     }
 
-    @SuppressLint("FragmentLiveDataObserve")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this,factory).get(QuotesViewModel::class.java)
-        Coroutines.main {
-            try {
+        bindUI()
+    }
 
-                val quotes =  viewModel.quotes.await()
-                quotes.observe(this, Observer {
-                    context?.toast(it.size.toString())
-                })
-            }
-            catch (e:ApiExceptions){
-                context?.toast(e.message.toString())
-            }
+
+    private fun bindUI() = Coroutines.main {
+
+        try {
+            progress_bar.show()
+            viewModel.quotes.await().observe(viewLifecycleOwner, Observer {
+                progress_bar.hide()
+                initRecyclerView(it.toQuoteItem())
+            })
+        }
+        catch (e : ApiExceptions){
+            progress_bar.hide()
+            context?.toast(e.message.toString())
+        }
+    }
+
+    private fun initRecyclerView(quoteItem: List<QuoteItem>) {
+
+        val mAdapter = GroupAdapter<ViewHolder>().apply {
+            addAll(quoteItem)
+        }
+
+        recyclerview.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = mAdapter
+        }
+
+    }
+
+
+    private fun List<Quotes>.toQuoteItem() : List<QuoteItem>{
+        return this.map {
+            QuoteItem(it)
         }
     }
 
