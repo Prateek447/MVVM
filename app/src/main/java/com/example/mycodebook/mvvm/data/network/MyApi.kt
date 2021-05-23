@@ -32,10 +32,10 @@ interface MyApi {
 
     companion object{
         operator fun invoke(
-            networkConnnectionInterceptor: NetworkConnnectionInterceptor
+            networkConnectionInterceptor: NetworkConnectionInterceptor
         ) : MyApi{
 
-             val okHttpClient = OkHttpClient.Builder().addInterceptor(networkConnnectionInterceptor).build()
+             val okHttpClient = OkHttpClient.Builder().addInterceptor(networkConnectionInterceptor).build()
             return Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl("https://api.simplifiedcoding.in/course-apis/mvvm/")

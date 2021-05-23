@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MVVM">
         <activity android:name=".ui.auth.SignUpActivity" />
-        <activity android:name=".ui.auth.LoginActivity"/>
-            <activity android:name=".util.home.HomeActivity">
+            <activity android:name=".util.home.HomeActivity"/>
+                <activity android:name=".ui.auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

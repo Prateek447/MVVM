@@ -3,7 +3,7 @@ package com.example.mycodebook.mvvm
 import android.app.Application
 import com.example.mycodebook.mvvm.data.db.AppDataBase
 import com.example.mycodebook.mvvm.data.network.MyApi
-import com.example.mycodebook.mvvm.data.network.NetworkConnnectionInterceptor
+import com.example.mycodebook.mvvm.data.network.NetworkConnectionInterceptor
 import com.example.mycodebook.mvvm.data.preferences.PreferenceProvider
 import com.example.mycodebook.mvvm.data.repository.QuoteRepository
 import com.example.mycodebook.mvvm.data.repository.UserRepository
@@ -27,7 +27,7 @@ class MVVMApplication : Application(), KodeinAware {
         import(androidXModule(this@MVVMApplication))
 
         //Here we pass instance() because NetworkConnectionInterceptor needs context
-        bind() from singleton {NetworkConnnectionInterceptor(instance())}
+        bind() from singleton {NetworkConnectionInterceptor(instance())}
         //In the following binding we pass instance() because all the objects need
         //instances of other which is present and instance() function will automatically
         //give the instance of object which is required
