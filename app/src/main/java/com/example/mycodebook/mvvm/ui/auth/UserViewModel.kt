@@ -2,12 +2,12 @@ package com.example.mycodebook.mvvm.ui.auth
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModel
-import com.example.mycodebook.mvvm.data.repository.MyRepository
+import com.example.mycodebook.mvvm.data.repository.UserRepository
 import com.example.mycodebook.mvvm.util.ApiExceptions
+import com.example.mycodebook.mvvm.util.Coroutines
 import com.example.mycodebook.mvvm.util.NoInternetException
-import net.simplifiedcoding.mvvmsampleapp.util.Coroutines
 
-class ActivityViewModel(private val repository: MyRepository) : ViewModel() {
+class UserViewModel(private val repository: UserRepository) : ViewModel() {
 
     var email : String? = null
     var password : String? = null

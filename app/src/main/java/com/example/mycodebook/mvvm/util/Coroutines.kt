@@ -1,4 +1,4 @@
-package net.simplifiedcoding.mvvmsampleapp.util
+package com.example.mycodebook.mvvm.util
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

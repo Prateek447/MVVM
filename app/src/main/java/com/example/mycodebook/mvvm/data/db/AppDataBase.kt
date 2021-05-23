@@ -4,16 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.mycodebook.mvvm.data.db.entites.Quotes
 import com.example.mycodebook.mvvm.data.db.entites.User
 
 
 @Database(
-    entities = [User::class],
+    entities = [User::class, Quotes::class],
     version = 1
 )
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
+    abstract fun getQuoteDao() : QuoteDao
 
     companion object {
 

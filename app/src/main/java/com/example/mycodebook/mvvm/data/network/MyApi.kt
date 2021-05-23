@@ -1,11 +1,14 @@
 package com.example.mycodebook.mvvm.data.network
 
+import com.example.mycodebook.mvvm.data.network.responses.AuthResponse
+import com.example.mycodebook.mvvm.data.network.responses.QuotesResponse
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface MyApi {
@@ -24,6 +27,8 @@ interface MyApi {
        @Field("password") password: String
    ) : Response<AuthResponse>
 
+   @GET("Quotes")
+   suspend fun getQuotes() : Response<QuotesResponse>
 
     companion object{
         operator fun invoke(
